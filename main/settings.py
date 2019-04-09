@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'polls.apps.PollsConfig',
+    'django_jenkins',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -52,10 +53,16 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'main.urls'
 
+JENKINS_TASKS = (
+    'django_jenkins.tasks.run_pep8',
+    'django_jenkins.tasks.run_pyflakes',
+    'django_jenkins.tasks.run_sloccount'
+)
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
